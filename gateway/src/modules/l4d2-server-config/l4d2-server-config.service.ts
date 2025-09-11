@@ -9,7 +9,7 @@ export class L4d2ServerConfigService {
 
   async getMotd(): Promise<string> {
     try {
-      const url = process.env.L4D2_SERVER_CONFIG_URL + 'motd.txtt';
+      const url = process.env.L4D2_SERVER_CONFIG_URL! + process.env.MOTD!;
       const response = await firstValueFrom(this.httpService.get(url));
       return response.data;
     } catch (error) {
