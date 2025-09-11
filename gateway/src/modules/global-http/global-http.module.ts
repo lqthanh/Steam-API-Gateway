@@ -3,7 +3,7 @@ import { HttpModule } from '@nestjs/axios';
 
 @Global()
 @Module({
-  imports: [HttpModule.register({})],
+  imports: [HttpModule],
   exports: [HttpModule],
 })
 export class GlobalHttpModule {}

@@ -1,12 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { L4d2ServerConfigModule } from './modules/l4d2-server-config/l4d2-server-config.module';
-import { SteamCommunityModule } from './modules/steam-community/steam-community.module';
-import { SteamStoreModule } from './modules/steam-store/steam-store.module';
+import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   // Swagger config
   const config = new DocumentBuilder()
