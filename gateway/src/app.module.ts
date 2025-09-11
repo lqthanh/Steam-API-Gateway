@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -10,6 +11,11 @@ import { SteamStoreModule } from './modules/steam-store/steam-store.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    CacheModule.register({
+      ttl: 300000,
+      max: 100,
       isGlobal: true,
     }),
     GlobalHttpModule,
