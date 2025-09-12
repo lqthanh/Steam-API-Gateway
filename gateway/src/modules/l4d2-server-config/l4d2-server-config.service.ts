@@ -5,11 +5,13 @@ import { ErrorMessage } from 'src/common/enums/error-message.enum';
 
 @Injectable()
 export class L4d2ServerConfigService {
+  private readonly baseUrl = process.env.L4D2_SERVER_CONFIG_URL;
+
   constructor(private readonly httpService: HttpService) {}
 
   async getMotd(): Promise<string> {
     try {
-      const url = process.env.L4D2_SERVER_CONFIG_URL! + process.env.MOTD!;
+      const url = `${this.baseUrl}motd.txt`;
       const response = await firstValueFrom(this.httpService.get(url));
       return response.data;
     } catch (error) {
