@@ -10,12 +10,12 @@ export class L4d2ServerConfigController {
     private readonly l4d2ServerConfigService: L4d2ServerConfigService,
   ) {}
 
-  @Get('getAdminSimple')
+  @Get('admin-simple')
   async getAdminSimple(): Promise<AdminSimpleDto[]> {
     return this.l4d2ServerConfigService.getAdminSimple();
   }
 
-  @Get('getMotd')
+  @Get('motd')
   async getMotd(): Promise<string> {
     return this.l4d2ServerConfigService.getMotd();
   }
