@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { ErrorMessage } from 'src/common/enums/error-message.enum';
+import { ErrorMessage } from '../../common/enums/error-message.enum';
 import { AdminSimpleDto } from './dto/admin-simple.dto';
 
 @Injectable()
