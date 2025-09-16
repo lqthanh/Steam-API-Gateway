@@ -1,5 +1,5 @@
 import { Controller, Get, Inject, Query, UseInterceptors } from '@nestjs/common';
-import { ApiCacheInterceptor } from 'src/common/interceptor/api-cache.interceptor';
+import { ApiCacheInterceptor } from '../../common/interceptor/api-cache.interceptor';
 import { L4d2ServerConfigService } from './l4d2-server-config.service';
 import { AdminSimpleDto } from './dto/admin-simple.dto';
 
