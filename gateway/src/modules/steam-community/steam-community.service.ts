@@ -40,7 +40,6 @@ export class SteamCommunityService {
 
       const title = $('div.collectionHeader div.workshopItemTitle').first().text().trim();
 
-
       const descriptionItems: any[] = [];
       $('div.workshopItemDescriptionForCollection div.bb_table').each((_, table) => {
       $(table)
@@ -68,6 +67,15 @@ export class SteamCommunityService {
       });
 
       const items: CollectionItemDto[] = [];
+      items.push({
+        url,
+        steamUrl: `${this.steamProtocol}${url}`,
+        imgUrl: '',
+        title: 'Full collection',
+        authorName: '',
+        authorUrl: '',
+        rateImgUrl: '',
+      });
       $('div.collectionChildren div.collectionItem').each((_, el) => {
         const $el = $(el);
         const url = $el.find('a[href*="/sharedfiles/filedetails/"]').first().attr('href') ?? '';
