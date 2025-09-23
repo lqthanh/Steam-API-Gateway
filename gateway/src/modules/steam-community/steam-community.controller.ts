@@ -17,15 +17,10 @@ export class SteamCommunityController {
     return this.steamCommunityService.getMiniProfile(steamID32, language);
   }
 
-  @Get('workshop-client-side-collection')
-  async getWorkshopClientSideCollection(
-  ): Promise<WorkshopCollectionDto> {
-    return this.steamCommunityService.getWorkshopCollection('3547570164');
-  }
-
-  @Get('workshop-server-side-collection')
+  @Get('workshop-collection')
   async getWorkshopCollection(
+    @Query('workshopId') workshopId: string,
   ): Promise<WorkshopCollectionDto> {
-    return this.steamCommunityService.getWorkshopCollection('3547613940');
+    return this.steamCommunityService.getWorkshopCollection(workshopId);
   }
 }
