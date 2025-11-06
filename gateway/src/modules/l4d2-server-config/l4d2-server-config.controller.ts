@@ -8,6 +8,9 @@ import { WorkshopCollectionDto } from '../steam-community/dto/workshop-collectio
 @Controller('l4d2-server-config')
 @UseInterceptors(ApiCacheInterceptor)
 export class L4d2ServerConfigController {
+  private readonly workshopClientSideId = process.env.WORKSHOP_CLIENT_SIDE_ID;
+  private readonly workshopServerSideId = process.env.WORKSHOP_SERVER_SIDE_ID;
+
   constructor(
     private readonly l4d2ServerConfigService: L4d2ServerConfigService,
     private readonly steamCommunityService: SteamCommunityService,
@@ -26,12 +29,12 @@ export class L4d2ServerConfigController {
   @Get('workshop-client-side-collection')
   async getWorkshopClientSideCollection(
   ): Promise<WorkshopCollectionDto> {
-    return this.steamCommunityService.getWorkshopCollection('3547570164');
+    return this.steamCommunityService.getWorkshopCollection(this.workshopClientSideId!);
   }
 
   @Get('workshop-server-side-collection')
   async getWorkshopCollection(
   ): Promise<WorkshopCollectionDto> {
-    return this.steamCommunityService.getWorkshopCollection('3547613940');
+    return this.steamCommunityService.getWorkshopCollection(this.workshopServerSideId!);
   }
 }
