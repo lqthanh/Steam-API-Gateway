@@ -9,7 +9,7 @@ import * as cheerio from 'cheerio';
 @Injectable()
 export class SteamCommunityService {
   private readonly baseUrl = process.env.STEAM_COMMUNITY_URL;
-  private readonly steamProtocol = process.env.STEAM_PROTOCOL;
+  private readonly steamOpenUrl = process.env.STEAM_OPEN_URL;
   private readonly baseSteamID64 = process.env.BASE_STEAM_ID64;
 
   constructor(private readonly httpService: HttpService) {}
@@ -23,7 +23,7 @@ export class SteamCommunityService {
       const response = await firstValueFrom(this.httpService.get(url));
       const steamID64 = BigInt(this.baseSteamID64!) + BigInt(steamID32);
       response.data.profile_url = `${this.baseUrl}profiles/${steamID64}`;
-      response.data.profile_steam_url = `${this.steamProtocol}openurl/${this.baseUrl}profiles/${steamID64}`;
+      response.data.profile_steam_url = `${this.steamOpenUrl}${this.baseUrl}profiles/${steamID64}`;
       return response.data;
     } catch (error) {
       throw new HttpException(ErrorMessage.FETCH_DATA_ERROR, HttpStatus.BAD_GATEWAY);
@@ -69,7 +69,7 @@ export class SteamCommunityService {
       const items: CollectionItemDto[] = [];
       items.push({
         url,
-        steamUrl: `${this.steamProtocol}${url}`,
+        steamUrl: `${this.steamOpenUrl}${url}`,
         imgUrl: '',
         title: 'Full collection',
         authorName: '',
@@ -81,7 +81,7 @@ export class SteamCommunityService {
         const url = $el.find('a[href*="/sharedfiles/filedetails/"]').first().attr('href') ?? '';
         items.push({
           url,
-          steamUrl: url ? `${this.steamProtocol}${url}` : '',
+          steamUrl: url ? `${this.steamOpenUrl}${url}` : '',
           imgUrl: $el.find('img.workshopItemPreviewImage').attr('src') ?? '',
           title: $el.find('div.workshopItemTitle').text().trim(),
           authorName: $el.find('span.workshopItemAuthorName a').text().trim(),
